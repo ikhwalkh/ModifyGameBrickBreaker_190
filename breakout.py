@@ -141,10 +141,8 @@ class Brick(GameObject):
         if self.hits <= 0:
             self.delete()
         else:
-            self.canvas.itemconfig(
-                self.item,
-                fill=Brick.COLORS[self.hits]
-            )
+            self.canvas.itemconfig(self.item,
+                                   fill=Brick.COLORS[self.hits])
 
 
 class Game(tk.Frame):
@@ -156,12 +154,9 @@ class Game(tk.Frame):
         self.width = 610
         self.height = 400
 
-        self.canvas = tk.Canvas(
-            self,
-            bg='#aaaaff',
-            width=self.width,
-            height=self.height
-        )
+        self.canvas = tk.Canvas(self,bg='#aaaaff',
+                                width=self.width,
+                                height=self.height)
 
         self.canvas.pack()
         self.pack()
@@ -171,11 +166,8 @@ class Game(tk.Frame):
         self.running = False
 
         # Membuat paddle
-        self.paddle = Paddle(
-            self.canvas,
-            self.width / 2,
-            326
-        )
+        self.paddle = Paddle(self.canvas,
+                             self.width / 2,326)
 
         self.items[self.paddle.item] = self.paddle
 
@@ -226,51 +218,36 @@ class Game(tk.Frame):
 
         paddle_coords = self.paddle.get_position()
 
-        x = (
-            paddle_coords[0] + paddle_coords[2]
-        ) * 0.5
+        x = (paddle_coords[0] + paddle_coords[2] ) * 0.5
 
         self.ball = Ball(self.canvas, x, 310)
         self.paddle.set_ball(self.ball)
 
     def add_brick(self, x, y, hits):
         brick = Brick(self.canvas, x, y, hits)
-
         self.items[brick.item] = brick
 
     def draw_text(self, x, y, text, size=20):
         font = ('Arial', size, 'bold')
 
-        return self.canvas.create_text(
-            x, y,
-            text=text,
-            font=font
-        )
+        return self.canvas.create_text(x, y, text=text, font=font )
 
     def update_lives_text(self):
         text = 'Lives: {}'.format(self.lives)
 
         if self.hud is None:
-            self.hud = self.draw_text(
-                50, 20, text, 15
-            )
+            self.hud = self.draw_text(50, 20, text, 15 )
         else:
-            self.canvas.itemconfig(
-                self.hud,
-                text=text
-            )
+            self.canvas.itemconfig(self.hud, text=text )
 
     def start_game(self):
         if self.running:
             return
-
+        
         self.running = True
-
         self.canvas.unbind('<space>')
         self.canvas.delete(self.text)
-
         self.paddle.ball = None
-
         self.game_loop()
 
     def game_loop(self):
@@ -279,20 +256,12 @@ class Game(tk.Frame):
 
         self.check_collisions()
 
-        num_bricks = len(
-            self.canvas.find_withtag('brick')
-        )
+        num_bricks = len(self.canvas.find_withtag('brick'))
 
         # Kondisi menang
         if num_bricks == 0:
             self.running = False
-
-            self.draw_text(
-                300, 200,
-                'You Win!',
-                30
-            )
-
+            self.draw_text(300, 200,'You Win!', 30)
             return
 
         # Kondisi bola jatuh
@@ -303,13 +272,7 @@ class Game(tk.Frame):
 
             if self.lives <= 0:
                 self.running = False
-
-                self.draw_text(
-                    300, 200,
-                    'You Lose! Game Over!',
-                    25
-                )
-
+                self.draw_text(300, 200, 'You Lose! Game Over!', 25)
                 return
 
             self.paddle.ball = None
