@@ -1,7 +1,5 @@
-
 import tkinter as tk
 import random
-
 
 class BrickBreaker:
     def __init__(self, root):
@@ -20,19 +18,16 @@ class BrickBreaker:
         )
         self.canvas.pack()
 
-    
         self.score = 0
         self.lives = 3
         self.running = False
 
-        
         self.paddle = self.canvas.create_rectangle(
             350, 540, 450, 555,
-            fill="#00d4ff",
+            fill="#ffc800",
             outline=""
         )
 
-        
         self.ball = self.canvas.create_oval(
             390, 510, 410, 530,
             fill="white",
@@ -50,11 +45,9 @@ class BrickBreaker:
             font=("Arial", 16, "bold")
         )
 
-        
         self.bricks = []
         self.create_bricks()
 
-        
         self.root.bind("<Left>", self.move_left)
         self.root.bind("<Right>", self.move_right)
         self.root.bind("<space>", self.start_game)
