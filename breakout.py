@@ -25,7 +25,7 @@ class Ball(GameObject):
         item = canvas.create_oval(
             x - self.radius, y - self.radius,
             x + self.radius, y + self.radius,
-            fill='white'
+            fill='black'
         )
 
         super().__init__(canvas, item)
@@ -90,7 +90,7 @@ class Paddle(GameObject):
             y - self.height / 2,
             x + self.width / 2,
             y + self.height / 2,
-            fill='yellow'
+            fill='blue'
         )
 
         super().__init__(canvas, item)
@@ -112,9 +112,9 @@ class Paddle(GameObject):
 class Brick(GameObject):
 
     COLORS = {
-        1: '#e74c3c',
-        2: '#3498db',
-        3: '#222222'
+        1: "#3ce7e1",
+        2: "#34db58",
+        3: "#D207E4"
     }
 
     def __init__(self, canvas, x, y, hits):
@@ -154,7 +154,7 @@ class Game(tk.Frame):
         self.width = 610
         self.height = 400
 
-        self.canvas = tk.Canvas(self,bg='#aaaaff',
+        self.canvas = tk.Canvas(self,bg="#F00000",
                                 width=self.width,
                                 height=self.height)
 
